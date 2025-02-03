@@ -13,10 +13,8 @@ def choose_branch(**kwargs):
 
 with DAG('simple_dag',
          start_date=datetime(2025, 3, 2),
-         title='a simple dag run',
-         schedule='@daily',
-         catchup=False
-         ) as dag:
+         schedule_interval='@daily',  # Replaced 'schedule' with 'schedule_interval'
+         catchup=False) as dag:
 
     start_task = DummyOperator(
         task_id='start',
