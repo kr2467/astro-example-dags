@@ -1,7 +1,7 @@
 from airflow import DAG
 from datetime import datetime
 from airflow.operators.python_operator import BranchPythonOperator
-from airflow.operators.dummy_operator import DummyOperator  # Corrected import
+from airflow.operators.dummy_operator import DummyOperator
 
 def choose_branch(**kwargs):
     day_of_week = datetime.now().weekday()
@@ -13,7 +13,7 @@ def choose_branch(**kwargs):
 
 with DAG('simple_dag',
          start_date=datetime(2025, 3, 2),
-         schedule_interval='@daily',  # Replaced 'schedule' with 'schedule_interval'
+         schedule_interval='@daily',
          catchup=False) as dag:
 
     start_task = DummyOperator(
@@ -23,8 +23,7 @@ with DAG('simple_dag',
     
     branching = BranchPythonOperator(
         task_id='branching',
-        python_callable=choose_branch,
-        provide_context=True
+        python_callable=choose_branch
     )
     
     branch_1 = DummyOperator(
