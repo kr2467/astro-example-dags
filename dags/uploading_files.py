@@ -10,11 +10,11 @@ with DAG(
         start_date=datetime(2025,4,2),
         retries=1
         ) as dag:
-    upload=LocalFileSystemoS3Operator(
+    upload=LocalFileSystemToS3Operator(
         task_id='uploading_task',
-        filename='C:\Users\kotha.rao\Desktop\Boot camp\IPL_Ball_by_Ball_2008_2022.csv',
+        filename=r'C:\Users\kotha.rao\Desktop\Boot camp\IPL_Ball_by_Ball_2008_2022.csv',
         bucket_name='knrbucket',
         key='arn:aws:s3:::knrbucket',
-        aws_conn_id=aws_default        
+        aws_conn_id='aws_default'        
         )
     upload
