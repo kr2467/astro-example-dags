@@ -8,7 +8,7 @@ with DAG(
         tags=['uploading'],
         description='Uploading a file from local system to S3',
         start_date=datetime(2025, 4, 2),
-        catchup=False  # Avoid backfilling
+        catchup=False  
         ) as dag:
     
     upload = S3FileOperator(
