@@ -16,7 +16,7 @@ with DAG(
         bucket_name='knrbucket',
         key='data/IPL_Ball_by_Ball_2008_2022.csv',
         aws_conn_id='aws_default',
-        retries=1  
+
     )
 
     upload
