@@ -11,12 +11,17 @@ with DAG(
         catchup=False  
         ) as dag:
     
+    start = DummyOperator(
+        task_id='start_task',
+    )
+    
     upload = DummyOperator(
-        task_id='uploading_task',
-        file_path=r'C:\Users\kotha.rao\Desktop\Boot camp\IPL_Ball_by_Ball_2008_2022.csv',
-        bucket_name='knrbucket',
-        object_key='data/IPL_Ball_by_Ball_2008_2022.csv', 
-        aws_conn_id='aws_default',
+        task_id='uploading_task',  
     )
 
-    upload
+    end = DummyOperator(
+        task_id='end_task',
+    )
+
+    # Defining task dependencies
+    start >> upload >> end
