@@ -4,7 +4,7 @@ from airflow.operators.dummy_operator import DummyOperator
 from airflow.utils.task_group import TaskGroup
 
 with DAG(
-        'task_group',
+        'task_groups',
         schedule='@once',
         start_date=datetime(2025,4,2),
         catchup=False
