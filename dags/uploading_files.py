@@ -14,9 +14,8 @@ with DAG(
         task_id='uploading_task',
         filename=r'C:\Users\kotha.rao\Desktop\Boot camp\IPL_Ball_by_Ball_2008_2022.csv',
         bucket_name='knrbucket',
-        key='data/IPL_Ball_by_Ball_2008_2022.csv',
+        dest_key='data/IPL_Ball_by_Ball_2008_2022.csv',  
         aws_conn_id='aws_default',
-
     )
 
     upload
