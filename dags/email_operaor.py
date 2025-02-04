@@ -1,7 +1,4 @@
 from airflow import DAG
-from airflow.providers.amazon.aws.sensors.s3 import S3FileSensor
-from airflow.providers.amazon.aws.operators.glue import AwsGlueJobOperator
-from airflow.providers.amazon.aws.operators.dynamodb import DynamoDBOperator
 from airflow.operators.email import EmailOperator
 from datetime import datetime
 
