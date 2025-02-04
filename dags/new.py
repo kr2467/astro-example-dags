@@ -11,33 +11,33 @@ def choose_branch(**kwargs):
     else:
         return 'branch_2'
 
-with DAG('simple_dag',
+with DAG('simpleee_dag',
          start_date=datetime(2025, 3, 2),
          schedule_interval='@daily',
          catchup=False) as dag:
 
     start_task = DummyOperator(
-        task_id='start',
+        task_id='startt',
         dag=dag
     )
     
     branching = BranchPythonOperator(
-        task_id='branching',
+        task_id='branchingg',
         python_callable=choose_branch
     )
     
     branch_1 = DummyOperator(
-        task_id='branch_1',
+        task_id='branchh_1',
         dag=dag
     )
     
     branch_2 = DummyOperator(
-        task_id='branch_2',
+        task_id='branchh_2',
         dag=dag
     )
     
     end_task = DummyOperator(
-        task_id='end',
+        task_id='endd',
         dag=dag
     )
     
