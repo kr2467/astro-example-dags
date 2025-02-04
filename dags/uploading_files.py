@@ -7,8 +7,7 @@ with DAG(
         schedule='@once',
         tags=['uploading'],
         description='Uploading a file from local system to S3',
-        start_date=datetime(2025, 4, 2),
-        retries=1
+        start_date=datetime(2025, 4, 2)
         ) as dag:
     
     upload = LocalFilesystemToS3Operator(
@@ -16,7 +15,8 @@ with DAG(
         filename=r'C:\Users\kotha.rao\Desktop\Boot camp\IPL_Ball_by_Ball_2008_2022.csv',
         bucket_name='knrbucket',
         key='data/IPL_Ball_by_Ball_2008_2022.csv',
-        aws_conn_id='aws_default'        
+        aws_conn_id='aws_default',
+        retries=1  
     )
 
     upload
