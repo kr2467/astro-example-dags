@@ -3,10 +3,10 @@ from airflow.operators.email import EmailOperator
 from datetime import datetime
 
 with DAG('s3_glue_dynamodb',
-         start_date=datetime(2025,4,2),
+         start_date=datetime(2025,2,4),
          description='Automation of s3 to dynamodb',
          tags=['Air flow'],
-         schedule='@daily', catchup=False) as dag:
+         schedule='@once', catchup=False) as dag:
     
     send_email = EmailOperator(
         task_id='send_email_on_success',
