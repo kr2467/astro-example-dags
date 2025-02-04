@@ -1,6 +1,6 @@
 from airflow import DAG
 from datetime import datetime
-from airflow.dummy_operator import DummyOperator
+from airflow.operators.dummy_operator import DummyOperator
 from airflow.utils.task_group import TaskGroup
 
 with DAG(
