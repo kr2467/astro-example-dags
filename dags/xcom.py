@@ -14,7 +14,7 @@ def pull_value_from_xcom(**kwargs):
 with DAG(
         'xcom_execution',
         schedule_interval='@once',
-        start_date=datetime(2025, 4, 2),  # Corrected the argument name to `start_date`
+        start_date=datetime(2025, 1, 2), 
         catchup=False
         ) as dag:
     
