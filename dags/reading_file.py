@@ -8,7 +8,7 @@ def read_file(bucket_name, file_key):
     s3_client = boto3.client('s3')
     response = s3_client.get_object(Bucket=bucket_name, Key=file_key)
     file_content = response['Body'].read().decode('utf-8')
-    return file_content
+    print(file_content)
 
 
 with DAG(
