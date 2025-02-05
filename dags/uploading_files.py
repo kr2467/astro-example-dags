@@ -4,7 +4,7 @@ from airflow.providers.amazon.aws.transfers.s3 import S3FileOperator
 
 with DAG(
         'local_to_s3',
-        schedule='@once',
+        schedule='@daily',
         tags=['uploading'],
         description='Uploading a file from local system to S3',
         start_date=datetime(2025, 4, 2),
