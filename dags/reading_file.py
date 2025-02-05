@@ -1,6 +1,6 @@
 from airflow import DAG
 from datetime import datetime
-from airflow.operaors.python import PythonOperator
+from airflow.operators.python import PythonOperator
 import boto3
 
 def read_file(bucket_name,file_key):
