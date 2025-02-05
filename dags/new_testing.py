@@ -9,8 +9,7 @@ def read_file(bucket_name, file_key):
         response = s3_client.get_object(Bucket=bucket_name, Key=file_key)
         file_content = response['Body'].read().decode('utf-8')
         print(file_content)
-    except Exception as e:
-        print(f"Error occurred: {str(e)}")
+
 
 with DAG(
     'testing_a_file',
