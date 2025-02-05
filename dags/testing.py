@@ -13,7 +13,7 @@ def read_file(bucket_name, file_key, **kwargs):
 with DAG(
     'testing_a_file',
     schedule_interval='@once',
-    start_date=datetime(2025, 5, 2),
+    start_date=datetime(2025, 1, 2),
     catchup=False
 ) as dag:
     
