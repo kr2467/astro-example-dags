@@ -20,7 +20,7 @@ def transform_data(**kwargs):
 with DAG(
     'retrieving_a_file',
     schedule_interval='@once',
-    start_date=datetime(2025, 5, 2),
+    start_date=datetime(2025, 1, 2),
     catchup=False
 ) as dag:
     
