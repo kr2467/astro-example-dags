@@ -2,9 +2,8 @@ from airflow import DAG
 from datetime import datetime
 from airflow.operators.python import PythonOperator
 import boto3
-import pandas as pd
 
-def read_file(bucket_name, file_key, **kwargs):
+def read_file(bucket_name, file_key):
     s3_client = boto3.client('s3')
     response = s3_client.get_object(Bucket=bucket_name, Key=file_key)
     file_content = response['Body'].read().decode('utf-8')
