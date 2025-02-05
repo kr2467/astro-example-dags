@@ -1,6 +1,6 @@
 from airflow import DAG
 from datetime import datetime
-from airflow.providers.amazon.aws.transfers.s3 import S3FileOperator  
+from airflow.providers.amazon.aws.transfers.s3 import S3FileOperator
 
 with DAG(
         'local_to_s3',
