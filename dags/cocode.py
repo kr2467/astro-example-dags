@@ -19,7 +19,7 @@ def transform_data(**kwargs):
     
     df = pd.read_csv(StringIO(file_content))
     
-    result = df.groupby(['ID', 'batter'])['total_run'].sum()
+    result = df.groupby(['ID', 'batter'])['total_run'].sum().rename(columns={'ID':'MATCH_ID','batter':'BATSMAN_NAME','total_run':'total_runs'})
     
     print(result)
 
