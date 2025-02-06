@@ -3,7 +3,6 @@ from airflow.providers.amazon.aws.operators.s3 import S3Hook
 from airflow.operators.python_operator import PythonOperator
 from datetime import datetime
 import pandas as pd
-from io import StringIO
 
 def read_s3_file(**kwargs):
     s3 = S3Hook(aws_conn_id='aws_default')
@@ -16,22 +15,19 @@ def transform_data(**kwargs):
     ti = kwargs['ti']
     file_content = ti.xcom_pull(task_ids='read_s3_file')
     
-    # Load the content into a DataFrame
-    df = pd.read_csv(StringIO(file_content))
+    df = pd.read_csv(file_content)
     
-    # Perform the transformation
-    result = df.groupby(['ID', 'batter'])['total_run'].sum().reset_index()
+    result = df.groupby(['ID', 'batter'])['total_run'].sum()
     
-    # Print the transformed data
     print(result)
 
 default_args = {
     'owner': 'airflow',
     'start_date': datetime(2025, 2, 2),
-    'retries': 1,
 }
 
 with DAG('s3_read_transform_dag', default_args=default_args, schedule_interval='@daily') as dag:
+    
     read_file = PythonOperator(
         task_id='read_s3_file',
         python_callable=read_s3_file,
