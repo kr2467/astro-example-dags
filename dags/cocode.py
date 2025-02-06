@@ -18,21 +18,17 @@ def transform_data(**kwargs):
     
     df = pd.read_csv(StringIO(file_content))
     
-    # Perform the transformation and reset the index
-    result = df.groupby(['ID', 'batter'])['total_run'].sum().reset_index().rename(columns={'ID': 'MATCH_ID', 'batter': 'BATSMAN_NAME', 'total_run': 'TOTAL_RUNS'})
+    result = df.groupby(['ID', 'batter'])['total_run'].sum().rename(columns={'ID': 'MATCH_ID', 'batter': 'BATSMAN_NAME', 'total_run': 'TOTAL_RUNS'})
     
-    # Convert the result back to CSV
     csv_buffer = StringIO()
     result.to_csv(csv_buffer, index=False)
     
-    # Push the transformed data to XCom
     ti.xcom_push(key='transformed_data', value=csv_buffer.getvalue())
 
 def store_transformed_data(**kwargs):
     ti = kwargs['ti']
     transformed_data = ti.xcom_pull(task_ids='transform_data', key='transformed_data')
     
-    # Store the transformed data back to S3
     s3 = S3Hook(aws_conn_id='aws_default')
     bucket_name = 'knrbucket'
     transformed_key = 'transformed/IPL_Ball_by_Ball_Transformed.csv'
