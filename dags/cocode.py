@@ -5,7 +5,6 @@ from datetime import datetime
 import pandas as pd
 from io import StringIO
 
-
 def read_s3_file(**kwargs):
     s3 = S3Hook(aws_conn_id='aws_default')
     bucket_name = 'knrbucket'
@@ -19,7 +18,8 @@ def transform_data(**kwargs):
     
     df = pd.read_csv(StringIO(file_content))
     
-    result = df.groupby(['ID', 'batter'])['total_run'].sum().rename(columns={'ID':'MATCH_ID','batter':'BATSMAN_NAME','total_run':'total_runs'})
+    # Perform the transformation and reset the index
+    result = df.groupby(['ID', 'batter'])['total_run'].sum().reset_index().rename(columns={'ID': 'MATCH_ID', 'batter': 'BATSMAN_NAME', 'total_run': 'TOTAL_RUNS'})
     
     print(result)
 
