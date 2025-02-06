@@ -22,19 +22,12 @@ def transform_data(**kwargs):
     # Perform the transformation
     result = df.groupby(['ID', 'batter'])['total_run'].sum().reset_index()
     
-    # Convert the result back to CSV
-    csv_buffer = StringIO()
-    result.to_csv(csv_buffer, index=False)
-    
-    # Store the transformed data back to S3
-    s3 = S3Hook(aws_conn_id='aws_default')
-    transformed_key = 'transformed/IPL_Ball_by_Ball_Transformed.csv'
-    s3.load_string(csv_buffer.getvalue(), transformed_key, bucket_name, replace=True)
-    print("Transformation complete and stored in S3")
+    # Print the transformed data
+    print(result)
 
 default_args = {
     'owner': 'airflow',
-    'start_date': datetime(2025, 1, 2),
+    'start_date': datetime(2025, 2, 2),
     'retries': 1,
 }
 
