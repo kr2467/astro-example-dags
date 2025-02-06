@@ -11,9 +11,9 @@ with DAG(
 
     delete = S3DeleteObjectsOperator(
         task_id='delete_operator',
-        bucket_name='triggerbucketobject',
+        bucket='triggerbucketobject', 
         keys=['IPL_Matches_2008_2022.csv'],
         aws_conn_id='aws_default'
     )
 
-delete  
+delete 
