@@ -18,7 +18,7 @@ def transform_data(**kwargs):
     
     df = pd.read_csv(StringIO(file_content))
     
-    result = df.groupby(['ID', 'batter'])['total_run'].sum().rename(columns={'ID': 'MATCH_ID', 'batter': 'BATSMAN_NAME', 'total_run': 'TOTAL_RUNS'})
+    result = df.groupby(['ID', 'batter'])['total_run'].sum().reset_index().rename(columns={'ID': 'MATCH_ID', 'batter': 'BATSMAN_NAME', 'total_run': 'TOTAL_RUNS'})
     
     csv_buffer = StringIO()
     result.to_csv(csv_buffer, index=False)
