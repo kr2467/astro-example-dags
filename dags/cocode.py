@@ -12,7 +12,7 @@ def read_s3_file(**kwargs):
 
 default_args = {
     'owner': 'airflow',
-    'start_date': datetime(2023, 1, 1),
+    'start_date': datetime(2025, 1, 2),
     'retries': 1,
 }
 
