@@ -21,14 +21,30 @@ def transform_data(**kwargs):
     # Perform the transformation and reset the index
     result = df.groupby(['ID', 'batter'])['total_run'].sum().reset_index().rename(columns={'ID': 'MATCH_ID', 'batter': 'BATSMAN_NAME', 'total_run': 'TOTAL_RUNS'})
     
-    print(result)
+    # Convert the result back to CSV
+    csv_buffer = StringIO()
+    result.to_csv(csv_buffer, index=False)
+    
+    # Push the transformed data to XCom
+    ti.xcom_push(key='transformed_data', value=csv_buffer.getvalue())
+
+def store_transformed_data(**kwargs):
+    ti = kwargs['ti']
+    transformed_data = ti.xcom_pull(task_ids='transform_data', key='transformed_data')
+    
+    # Store the transformed data back to S3
+    s3 = S3Hook(aws_conn_id='aws_default')
+    bucket_name = 'knrbucket'
+    transformed_key = 'transformed/IPL_Ball_by_Ball_Transformed.csv'
+    s3.load_string(transformed_data, transformed_key, bucket_name, replace=True)
+    print("Transformation complete and stored in S3")
 
 default_args = {
     'owner': 'airflow',
     'start_date': datetime(2025, 2, 2),
 }
 
-with DAG('s3_read_transform_dag', default_args=default_args, schedule_interval='@daily') as dag:
+with DAG('s3_read_transform_store_dag', default_args=default_args, schedule_interval='@daily') as dag:
     
     read_file = PythonOperator(
         task_id='read_s3_file',
@@ -41,5 +57,11 @@ with DAG('s3_read_transform_dag', default_args=default_args, schedule_interval='
         python_callable=transform_data,
         provide_context=True,
     )
+    
+    store_file = PythonOperator(
+        task_id='store_transformed_data',
+        python_callable=store_transformed_data,
+        provide_context=True,
+    )
 
-    read_file >> transform_file
+    read_file >> transform_file >> store_file
