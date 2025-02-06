@@ -3,6 +3,8 @@ from airflow.providers.amazon.aws.operators.s3 import S3Hook
 from airflow.operators.python_operator import PythonOperator
 from datetime import datetime
 import pandas as pd
+from io import StringIO
+
 
 def read_s3_file(**kwargs):
     s3 = S3Hook(aws_conn_id='aws_default')
