@@ -5,7 +5,7 @@ from airflow.providers.amazon.aws.operators.s3 import S3DeleteObjectsOperator
 with DAG(
     'delete_file',
     schedule_interval='@once',
-    start_date=datetime(2025, 4, 2),
+    start_date=datetime(2025, 2, 2),
     catchup=False
 ) as dag:
 
