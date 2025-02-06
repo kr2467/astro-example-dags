@@ -15,7 +15,7 @@ def transform_data(**kwargs):
     ti = kwargs['ti']
     file_content = ti.xcom_pull(task_ids='read_s3_file')
     
-    df = pd.read_csv(file_content)
+    df = pd.read_csv(StringIO(file_content))
     
     result = df.groupby(['ID', 'batter'])['total_run'].sum()
     
