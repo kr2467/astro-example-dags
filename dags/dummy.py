@@ -3,7 +3,7 @@ from airflow.operators.dummy_operator import DummyOperator
 from datetime import datetime
 
 with DAG('dummy_operator',
-        start_date=datetime(2025, 3, 2),
+        start_date=datetime(2025, 2, 2),
         description='a dummy operator',
         tags=['data'],
         schedule='@daily',
@@ -11,12 +11,12 @@ with DAG('dummy_operator',
         ) as dag:
 
     start_task = DummyOperator(
-        task_id='start',  # Corrected parameter name here
+        task_id='start',  
         dag=dag
     )
     
     end_operator = DummyOperator(
-        task_id='end',  # Corrected parameter name here
+        task_id='end', 
         dag=dag
     )
 
