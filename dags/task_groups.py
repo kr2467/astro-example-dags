@@ -6,7 +6,7 @@ from airflow.utils.task_group import TaskGroup
 with DAG(
         'task_groups',
         schedule='@once',
-        start_date=datetime(2025,4,2),
+        start_date=datetime(2025,2,2),
         catchup=False
         ) as dag:
     start = DummyOperator(
