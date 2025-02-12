@@ -5,7 +5,7 @@ from airflow import DAG
 
 
 with DAG(
-        's3_key_sensor',
+        's3_key_sensors',
         start_date=datetime(2025,2,10),
         schedule='@once',
         poke_interval=60,
