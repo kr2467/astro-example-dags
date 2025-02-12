@@ -15,7 +15,8 @@ with DAG(
         task_id='checking_file_existence',
         bucket_name='triggerbucketobject',
         bucket_key='IPL_Ball_by_Ball_2008_2022.csv',
-        poke_interval=60
+        poke_interval=60,
+        timeout=10
     )
     end_task = DummyOperator(
         task_id='end_task'
