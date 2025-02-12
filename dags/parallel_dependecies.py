@@ -5,7 +5,7 @@ from airflow import DAG
 
 
 with DAG(
-        's3_key_sensors',
+        'paralled',
         start_date=datetime(2025, 2, 2),
         schedule_interval='@once',
         description='A trail of file sensor',
