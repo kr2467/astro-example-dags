@@ -12,7 +12,7 @@ def pull_value_from_xcom(**kwargs):
     print(f"Pulled value from XCom: {value}")
     
 with DAG(
-        'xcom_execution',
+        'xcom_executionn',
         schedule_interval='@once',
         start_date=datetime(2025, 1, 2), 
         catchup=False
