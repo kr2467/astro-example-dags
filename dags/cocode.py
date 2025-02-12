@@ -40,7 +40,7 @@ default_args = {
     'start_date': datetime(2025, 2, 2),
 }
 
-with DAG('s3_read_transform_store_dag', default_args=default_args, schedule_interval='@daily') as dag:
+with DAG('s3', default_args=default_args, schedule_interval='@daily') as dag:
     
     read_file = PythonOperator(
         task_id='read_s3_file',
