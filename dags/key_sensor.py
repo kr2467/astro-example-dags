@@ -1,10 +1,20 @@
-from airflow.providers.amazon.aws.sensors.s3_key import S3KeySensor
+from airflow.providers.amazon.aws.sensors.s3 import S3KeySensor
 from airflow.operators.dummy import DummyOperator
-from datetime import datetime
+from datetime import datetime, timedelta
 from airflow import DAG
+
+default_args = {
+    'owner': 'airflow',
+    'depends_on_past': False,
+    'email_on_failure': False,
+    'email_on_retry': False,
+    'retries': 1,
+    'retry_delay': timedelta(minutes=5),
+}
 
 with DAG(
         's3_key_sensors',
+        default_args=default_args,
         start_date=datetime(2025, 2, 10),
         schedule_interval='@once',
         description='A trail of file sensor'
