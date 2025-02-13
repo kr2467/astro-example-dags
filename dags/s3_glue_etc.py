@@ -25,7 +25,7 @@ with DAG(
         bucket_key='IPL_Ball_by_Ball_2008_2022.csv',
         aws_conn_id='aws_default',
         poke_interval=60,
-        timeout=30
+        timeout=200
     )
 
     # Glue job operator to run the Glue job
